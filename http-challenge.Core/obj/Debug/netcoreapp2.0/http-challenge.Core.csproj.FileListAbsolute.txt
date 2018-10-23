@@ -1,8 +1,0 @@
-/Users/cem/Desktop/Emakina/http-challenge/http-challenge.Core/bin/Debug/netcoreapp2.0/http-challenge.Core.deps.json
-/Users/cem/Desktop/Emakina/http-challenge/http-challenge.Core/bin/Debug/netcoreapp2.0/http-challenge.Core.dll
-/Users/cem/Desktop/Emakina/http-challenge/http-challenge.Core/bin/Debug/netcoreapp2.0/http-challenge.Core.pdb
-/Users/cem/Desktop/Emakina/http-challenge/http-challenge.Core/obj/Debug/netcoreapp2.0/http-challenge.Core.csproj.CoreCompileInputs.cache
-/Users/cem/Desktop/Emakina/http-challenge/http-challenge.Core/obj/Debug/netcoreapp2.0/http-challenge.Core.AssemblyInfoInputs.cache
-/Users/cem/Desktop/Emakina/http-challenge/http-challenge.Core/obj/Debug/netcoreapp2.0/http-challenge.Core.AssemblyInfo.cs
-/Users/cem/Desktop/Emakina/http-challenge/http-challenge.Core/obj/Debug/netcoreapp2.0/http-challenge.Core.dll
-/Users/cem/Desktop/Emakina/http-challenge/http-challenge.Core/obj/Debug/netcoreapp2.0/http-challenge.Core.pdb
