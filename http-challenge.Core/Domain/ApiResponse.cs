@@ -1,9 +1,12 @@
-﻿namespace http_challenge.Core.Domain
+﻿using System;
+
+namespace http_challenge.Core.Domain
 {
+    [Serializable]
     public class ApiResponse
     {
         public string Message { get; set; }
-        public string Next { get; set;}
-        public string Method { get; set;}
+        public string Next { get; set; }
+        public string Method { get; set; }
     }
-}    
+}
