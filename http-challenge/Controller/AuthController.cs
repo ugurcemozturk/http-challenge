@@ -1,17 +1,19 @@
-﻿using http_challenge.Builders;
+﻿using System;
+using System.Net;
+using http_challenge.Builders;
 using http_challenge.Core.Domain;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters.Internal;
 
 namespace http_challenge
 {
-    //TODO: Add dynamic routing {controller}/{action}
+    [Route("[controller]/[action]")]
     public class AuthController : Controller
     {
         private ApiResponse _response;
 
-        [Route("/auth/info")]
-        public IActionResult Info()
+        [HttpGet]
+        public ObjectResult Info()
         {
             _response = ApiResponseBuilder
                 .CreateBuilder()
@@ -19,15 +21,15 @@ namespace http_challenge
                              "your role is to send two different token types " +
                              "correctly, the bearer and basic token")
                 .ToEndpoint("/auth/basic")
-                .WithMethod(ApiConstants.Get);
+                .WithMethod(HttpMethods.Get);
 
-            return StatusCode(100, Json(_response));
+            return Accepted(_response);
         }
 
-        [Route("/auth/basic")]
-        public IActionResult Basic()
+        [HttpGet]
+        public ObjectResult Basic()
         {
-            string authHeader = Request.Headers?[ApiConstants.Authorization];
+            string authHeader = Request.Headers?[HttpRequestHeader.Authorization.ToString()];
 
             if (!string.IsNullOrEmpty(authHeader) && authHeader.StartsWith(ApiConstants.Basic))
             {
@@ -35,7 +37,7 @@ namespace http_challenge
                     .CreateBuilder()
                     .WithMessage($"Invalid Auth header. What we received is: {authHeader}")
                     .ToEndpoint("/auth/basic")
-                    .WithMethod(ApiConstants.Get);
+                    .WithMethod(HttpMethods.Get);
 
                 return StatusCode(401, Json(_response));
             }
@@ -44,16 +46,14 @@ namespace http_challenge
                 .CreateBuilder()
                 .WithMessage("Now try with A Bearer Token")
                 .ToEndpoint("/auth/bearer")
-                .WithMethod(ApiConstants.Get);
+                .WithMethod(HttpMethods.Get);
 
-            return StatusCode(100, Json(_response));
-        }
+            return Accepted(_response);        }
 
-
-        [Route("/auth/bearer")]
-        public IActionResult Bearer()
+        [HttpGet]
+        public ObjectResult Bearer()
         {
-            string authHeader = Request.Headers?[ApiConstants.Authorization];
+            string authHeader = Request.Headers?[HttpRequestHeader.Authorization.ToString()];
 
             if (!string.IsNullOrEmpty(authHeader) && authHeader.StartsWith(ApiConstants.Bearer))
             {
@@ -61,7 +61,7 @@ namespace http_challenge
                     .CreateBuilder()
                     .WithMessage($"Invalid Auth header. What we received is: {authHeader}")
                     .ToEndpoint("/auth/basic")
-                    .WithMethod(ApiConstants.Get);
+                    .WithMethod(HttpMethods.Get);
 
                 return StatusCode(401, Json(_response));
             }
@@ -70,9 +70,9 @@ namespace http_challenge
                 .CreateBuilder()
                 .WithMessage("YOU DID IT! You wanna play with CORS now?")
                 .ToEndpoint("/cors/info")
-                .WithMethod(ApiConstants.Get);
+                .WithMethod(HttpMethods.Get);
 
-            return StatusCode(100, Json(_response));
+            return Accepted(_response);
         }
     }
 }
